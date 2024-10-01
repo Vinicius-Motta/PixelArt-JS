@@ -20,7 +20,7 @@ const createElement = (tag, className = "") =>{
 
 const setPixelColor = (pixel) => {
     pixel.style.backgroundColor = inputColor.value;
-}
+};
 
 const createPixel = () =>{
     const pixel = createElement("div", "pixel");
@@ -45,13 +45,14 @@ const loadCanvas = () => {
             row.append(createPixel());
         }
 
-        canvas.append(row)
+        canvas.append(row);
     }
-}
+};
 
 const updateCanvasSize = () => {
-    if(inputSize >= MIN_CANVAS_SIZE)
+    if(inputSize.value >= MIN_CANVAS_SIZE){
     loadCanvas();
+    }
 }
 
 const changeColor = () =>{
@@ -69,13 +70,13 @@ const changeColor = () =>{
     if(savedColors.every(check)){
         usedColors.append(button);
     }
-}
+};
 
 const resizeCanvas = (cursorPositionX) =>{
     if(!isResizing) return;
 
     const canvasOffset = canvas.getBoundingClientRect().left;
-    const width = `${cursorPositionX - canvasOffset -20}px`;
+    const width = `${cursorPositionX - canvasOffset - 20}px`;
 
     canvas.style.maxWidth = width;
     colResize.style.height = width;
@@ -91,7 +92,7 @@ const saveCanvas = () => {
             link.download = "pixelart.png";
 
             link.click();
-        }
+        },
     });
 }
 canvas.addEventListener("mousedown", () => (isPainting = true));
@@ -102,7 +103,7 @@ inputColor.addEventListener("change", changeColor);
 
 colResize.addEventListener("mousedown", () => (isResizing = true));
 
-main.addEventListener("mouseup", () => isResizing = false);
+main.addEventListener("mouseup", () => (isResizing = false));
 main.addEventListener("mousemove", ({clientX}) => resizeCanvas(clientX));
 
 buttonSave.addEventListener("click", saveCanvas);
